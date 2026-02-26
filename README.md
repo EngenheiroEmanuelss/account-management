@@ -36,6 +36,8 @@ Com o Docker Compose, você pode facilmente configurar um ambiente de desenvolvi
 
 Para utilizar este Docker Compose, você precisará ter instalado o Docker e o Docker Compose em sua máquina seguindo as intruções da documentação.
 
+Faça uma cópia do env.example e renomeie como .env.
+
 ### Executando comandos com Docker Compose
 
 Execute o seguinte comando para criar os contêineres:
