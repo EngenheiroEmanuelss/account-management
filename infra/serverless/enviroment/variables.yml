@@ -1,0 +1,43 @@
+APP_ENV: ${sls:stage}
+
+APP_TIMEZONE: ${self:custom.secrets.env.APP_TIMEZONE}
+APP_NAME: ${self:custom.secrets.env.APP_NAME}
+APP_KEY: ${self:custom.secrets.env.APP_KEY}
+APP_DEBUG: ${self:custom.secrets.env.APP_DEBUG}
+APP_URL: ${self:custom.secrets.env.APP_URL}
+API_URL: ${self:custom.secrets.env.API_URL}
+
+LOG_CHANNEL: ${self:custom.secrets.env.LOG_CHANNEL}
+LOG_LEVEL: ${self:custom.secrets.env.LOG_LEVEL}
+
+DB_DEBUG: ${self:custom.secrets.env.DB_DEBUG}
+DB_CONNECTION: ${self:custom.secrets.env.DB_CONNECTION}
+DB_HOST: ${self:custom.secrets.env.DB_HOST}
+DB_HOST_WRITER: ${self:custom.secrets.env.DB_HOST_WRITER}
+DB_HOST_READER: ${self:custom.secrets.env.DB_HOST_READER}
+DB_PORT: ${self:custom.secrets.env.DB_PORT}
+DB_DATABASE: ${self:custom.secrets.env.DB_DATABASE}
+DB_USERNAME: ${self:custom.secrets.env.DB_USERNAME}
+DB_PASSWORD: ${self:custom.secrets.env.DB_PASSWORD}
+
+BREF_PING_DISABLE: 1
+
+QUEUE_CONNECTION: sqs
+SQS_QUEUE: ${construct:default.queueUrl}
+
+SESSION_DRIVER: array
+SESSION_LIFETIME: 120
+
+FILESYSTEM_DISK: s3
+FILESYSTEM_APP_STORAGE_PATH: '/var/task/tmp/storage/app'
+AWS_USE_PATH_STYLE_ENDPOINT: false
+AWS_BUCKET: !Ref StorageBucket
+
+CACHE_STORE: ${self:custom.secrets.shared.CACHE_DRIVER}
+
+MEMCACHED_HOST: ${self:custom.secrets.shared.MEMCACHED_HOST}
+MEMCACHED_PORT: ${self:custom.secrets.shared.MEMCACHED_PORT}
+
+REDIS_HOST: ${self:custom.secrets.shared.REDIS_HOST}
+REDIS_PORT: ${self:custom.secrets.shared.REDIS_PORT}
+

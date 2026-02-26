@@ -1,0 +1,18 @@
+Resources:
+  ElasticCacheSubnetGroup:
+    Type: AWS::ElastiCache::SubnetGroup
+    Properties:
+      Description: "Cache Subnet Group"
+      SubnetIds: ${self:custom.config.vpc.subnetIds}
+  ElasticCacheCluster:
+    DependsOn: ElasticCacheSubnetGroup
+    Type: AWS::ElastiCache::CacheCluster
+    Properties:
+      ClusterName: ${self:custom.config.elasticCache.clusterName}
+      AutoMinorVersionUpgrade: true
+      Engine: redis
+      CacheNodeType: ${self:custom.config.elasticCache.nodeType}
+      NumCacheNodes: 1
+      VpcSecurityGroupIds: ${self:custom.config.vpc.securityGroupIds}
+      CacheSubnetGroupName:
+        Ref:   ElasticCacheSubnetGroup
