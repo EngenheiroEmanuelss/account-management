@@ -86,26 +86,4 @@ class AccountManagementService
             return $account->decreaseBalance($data->amount);
         });
     }
-
-
-    // event, tipo de evento (Enum) com Match, chamando corretamente a opção.
-// conta, account_id, numero, saldo disponível, increase, decrease, disponível.
-// criar DTO para validar a request.
-// definir rotas corretas para tudo
-// criar Resources para os retornos corretos, um para conta.
-// usar laravel data para retornar.
-// usar lock for update.
-
-// métodos:
-// salvar, salva conta com saldo
-// transferir, transferir valor de uma conta para outra
-// depositar, adicionar saldo
-
-// casos de teste:
-// saldo menor ou igual a zero, valores inválidos
-// conta inexistente em ambos os casos
-// saldo insuficiente em conta
-// deixar métodos do controller privados e apenas o principal público
-// criar uma camada de service
-
 }
