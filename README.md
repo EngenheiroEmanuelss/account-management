@@ -1,66 +1,112 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
-<p align="center">
+# account-management-api
 <a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
 
-## About Laravel
+Sobre
+-----------------------------------------------
+Projeto de gerenciamento de transações.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Configurando o projeto
+-----------------------------------------------
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+O projeto utiliza diversas bibliotecas e ferramentas para seu funcionamento adequado. Algumas das principais dependências são:
 
-## Learning Laravel
+-   Docker: Plataforma para criação e execução de contêineres. O Docker permite que as aplicações sejam executadas em um ambiente isolado, eliminando a dependência de configurações específicas do host. Mais informações podem ser encontradas em <https://www.docker.com/>.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Dependencias do projeto
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Essas bibliotecas e pacotes são essenciais para o projeto, pois fornecem funcionalidades importantes que devenmos dominar. Eles incluem o PHP, o framework Laravel, pacotes para autenticação, gerenciamento de permissões, auditoria, pesquisa de dados nos endpoints via query string, entre outros.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+-   Laravel: <https://laravel.com/>
+-   Bref: <https://bref.sh/>
+-   PHPUnit: <https://phpunit.de/>
+-   Spatie packages:
+    -   Laravel Data: <https://github.com/spatie/laravel-data>
+    -   Laravel HTTP Logger: <https://github.com/spatie/laravel-http-logger>
+    -   Laravel Permission: <https://github.com/spatie/laravel-permission>
 
-## Laravel Sponsors
+Executando o projeto
+-----------------------------------------------
+Com o Docker Compose, você pode facilmente configurar um ambiente de desenvolvimento local para o projeto com todas as suas dependências, sem precisar instalar nada além do docker. Ele consiste em um ambiente PHP / Laravel com uma API e um banco de dados MySQL. Além  de serviços de cache Redis e um contêiner pra gerenciamento de dependências com `composer` e outro para comandos do `artisan`.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### Requisitos
 
-### Premium Partners
+Para utilizar este Docker Compose, você precisará ter instalado o Docker e o Docker Compose em sua máquina seguindo as intruções da documentação.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+### Executando comandos com Docker Compose
 
-## Contributing
+Execute o seguinte comando para criar os contêineres:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+docker compose up
+```
 
-## Code of Conduct
+Caso haja alguma alteração, execute o seguinte comando para recriar os contêineres:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+docker compose down && docker compose build
+```
 
-## Security Vulnerabilities
+1.  Aguarde até que todos os contêineres estejam em execução e os logs mostrem que a API está pronta para ser acessada.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Comandos de desenvolvimento
+> Comandos que criam arquivos no docker precisam rodar como root
+```bash
+composer install
+```
+```bash
+php artisan key:generate
+```
+```bash
+php artisan migrate --seed
+```
+```bash
+php artisan db:seed --class=DemoSeeder
+```
 
-## License
+### Executar a fila no redis
+```bash
+ php artisan queue:work redis
+```
+### Caso efrente problemas com login
+```bash
+php artisan passport:keys
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Lint Tools
+Checar erros de linting:
+```bash
+--root ./vendor/bin/phpcs --standard=phpcs.xml -n app tests config database routes
+```
+Consertar erros de linting:
+```bash
+--root ./vendor/bin/phpcbf --standard=phpcs.xml -n app tests config database routes
+```
+
+### Remoção de cache
+```bash
+sudo chown -R ${USER}:${USER} ./vendor
+sudo chown -R ${USER}:${USER} ./.tmp
+
+# opcional
+rm -rf vendor
+rm -rf .tmp
+
+docker compose build --no-cache
+```
+
+### Integrando o PHPStorm para a execução dos testes
+Para facilitar a execução de testes com PHPUnit em um ambiente Docker Compose utilizando o PHPStorm, siga os passos abaixo:
+1.  Acesse o menu "File -> Settings -> PHP -> Test".
+2.  Clique no botão "+" para adicionar um novo interpretador remoto.
+3.  Abra as opções de interpretação remota clicando no símbolo "...".
+4.  Clique no botão "+" novamente e escolha a opção "From Docker".
+5.  Selecione "Docker Compose" e escolha o serviço "CLI" no menu suspenso.
+6.  Confirme as opções selecionadas e salve as configurações.
+7.  No canto superior direito, próximo às opções "Run" e "Debug", clique no menu suspenso e escolha "Edit Configurations".
+8.  Selecione "PHP Unit" e altere o interpretador para "CLI".
+
+Com essas configurações, é possível executar os testes utilizando o PHPUnit no Docker Compose diretamente pelo PHPStorm, facilitando o processo de desenvolvimento e garantindo a qualidade do código. É importante lembrar que esses passos podem variar dependendo da versão do PHPStorm utilizada. Caso encontre alguma dificuldade, consulte a documentação do Docker ou do PHPStorm para obter mais informações.

@@ -1,19 +1,68 @@
-/.phpunit.cache
-/node_modules
-/public/build
-/public/hot
-/public/storage
-/storage/*.key
-/vendor
-.env
-.env.backup
-.env.production
-.phpunit.result.cache
-Homestead.json
-Homestead.yaml
-auth.json
+### Laravel ###
+vendor/
+node_modules/
 npm-debug.log
 yarn-error.log
-/.fleet
+
+# Build assets
+.DS_Store
+.coverage
+.phpunit.cache
+.phpunit.result.cache
+.php-cs-fixer.cache
+clover.xml
+public/storage
+public/hot
+public_html/storage
+public_html/hot
+
+# Environment
+Homestead.yaml
+Homestead.json
+docker-compose.override.yml
+
+# Build
+/.vagrant
+/.serverless
+
+# Cache
+.tmp
+storage/*.key
+storage/docker
+.phpstorm.meta.php
+_ide_helper.php
+
+# Editor
 /.idea
 /.vscode
+/.editorconfig
+bootstrap/cache/services.php
+
+# Storage (keep directories)
+storage/app/*
+storage/framework/cache/*
+storage/framework/sessions/*
+storage/framework/views/*
+storage/logs/*
+
+# Git & Editor metadata
+**.git
+**.gitignore
+**.gitattributes
+
+# Ignore sass cache
+**.sass-cache
+
+# Ignore environment files, but keep specific ones
+.env
+.env.testing
+.env.production
+.env.backup
+
+# Config files
+?ulpfile.js
+?untfile.js
+
+# Docker & Run scripts
+run
+run.ps1
