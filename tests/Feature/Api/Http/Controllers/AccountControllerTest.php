@@ -201,6 +201,30 @@ class AccountControllerTest extends TestCase
     }
 
     #[Test]
+    public function itThrowsWhenTransferFromExistingAccountForInexistentAccount(): void
+    {
+        $amountTransfer = 20;
+
+        $originAccount      = $this->createAccount($this->originAccountId, $this->baseAmount);
+        $destinationAccount = 1234;
+
+        $transferPayload = [
+            "type"        => EventTypeEnum::TRANSFER->value,
+            "origin"      => $originAccount->id,
+            "amount"      => $amountTransfer,
+            "destination" => $destinationAccount
+        ];
+
+        $this->post($this->api . 'event', $transferPayload)
+            ->assertStatus(404);
+
+        $this->assertDatabaseHas(Account::class, [
+            'id'                => $originAccount->id,
+            'available_balance' => $this->baseAmount,
+        ]);
+    }
+
+    #[Test]
     public function itWithdrawAccount(): void
     {
         $amount = 20;
